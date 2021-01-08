@@ -16,6 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var global: Global
 //     @ObservedObject var global = Global()
     var body: some View {
+        NavigationView{
         VStack {
             Text((String(self.global.showMe)))
            
@@ -31,12 +32,15 @@ struct ContentView: View {
                 .padding()
             }
             ButtonView()
+            NavigationLink(destination: ButtonView()) {
+                Text("Go Inside")
+            }
         }
     }
+ }
 }
-
 struct ButtonView: View {
-    @ObservedObject var global = Global()
+    @EnvironmentObject var global: Global
     var body: some View {
         Button(action: {
             self.global.showMe.toggle()
